@@ -84,6 +84,19 @@
     }catch(error){console.warn('Supabase public data unavailable; using config fallback.',error);}
   }
   async function submitReservation(event){event.preventDefault();const form=event.currentTarget,button=form.querySelector('button[type="submit"]'),payload=Object.fromEntries(new FormData(form));button.disabled=true;success.style.display='block';success.style.background='rgba(47,138,87,.1)';success.style.color='#206b42';try{if(cfg.supabase?.enabled){await rest('reservations',{method:'POST',headers:{Prefer:'return=minimal'},body:JSON.stringify({customer_name:payload.name,phone:payload.phone,reservation_date:payload.date,reservation_time:payload.time,guest_count:Number(payload.guests),message:payload.message||null,status:'pending'})});success.textContent='✅ Votre demande de réservation a bien été envoyée.';}else{const list=JSON.parse(localStorage.getItem('restaurant_demo_reservations')||'[]');list.unshift({...payload,createdAt:new Date().toISOString()});localStorage.setItem('restaurant_demo_reservations',JSON.stringify(list));success.textContent='✅ Démonstration : demande enregistrée uniquement sur cet appareil.';}form.reset();}catch(error){success.style.background='#fff0ee';success.style.color='#a33e38';success.textContent='❌ La réservation n’a pas pu être envoyée. Merci de réessayer.';}finally{button.disabled=false;}}
+  function initGalleryLightbox(){
+    const box=document.getElementById('galleryLightbox'),img=document.getElementById('lightboxImage'),close=document.getElementById('lightboxClose'),prev=document.getElementById('lightboxPrev'),next=document.getElementById('lightboxNext');
+    if(!box||!img)return;
+    let current=0;
+    const images=()=>[...document.querySelectorAll('#galleryGrid img')];
+    const show=index=>{const list=images();if(!list.length)return;current=(index+list.length)%list.length;img.src=list[current].src;img.alt=list[current].alt||'Photo agrandie';box.classList.add('open');box.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';};
+    const hide=()=>{box.classList.remove('open');box.setAttribute('aria-hidden','true');document.body.style.overflow='';};
+    galleryGrid.addEventListener('click',event=>{const target=event.target.closest('img');if(!target)return;const list=images();show(list.indexOf(target));});
+    close.onclick=hide;prev.onclick=()=>show(current-1);next.onclick=()=>show(current+1);
+    box.addEventListener('click',event=>{if(event.target===box)hide();});
+    document.addEventListener('keydown',event=>{if(!box.classList.contains('open'))return;if(event.key==='Escape')hide();if(event.key==='ArrowLeft')show(current-1);if(event.key==='ArrowRight')show(current+1);});
+  }
+
   function initRevealAnimations(){
     const targets=[...document.querySelectorAll('.section .shell, .quick, .status')].filter(el=>!el.closest('[hidden]'));
     targets.forEach(el=>el.classList.add('reveal'));
@@ -100,8 +113,11 @@
     heroTitle.textContent=restaurant.name||'';heroText.textContent=restaurant.tagline||'';const special=cfg.dailySpecial||{};specialEyebrow.textContent=special.eyebrow||'';specialName.textContent=special.name||'';specialDescription.textContent=special.description||'';specialPrice.textContent=money(special.price||0);
     reviewsGrid.innerHTML=(cfg.reviews||[]).map(item=>`<article class="review"><div class="stars">★★★★★</div><h3>${esc(item.title)}</h3><p>${esc(item.text)}</p><strong>${esc(item.label)}</strong></article>`).join('');
     socialLinks.innerHTML=(cfg.socialLinks||[]).filter(item=>item.url&&item.url.trim()).map(item=>`<a class="social-link" href="${esc(item.url)}" target="_blank" rel="noopener noreferrer"><span class="social-icon">${esc(item.icon||'↗')}</span>${esc(item.label)}</a>`).join('');
-    if(!socialLinks.children.length)socialLinks.hidden=true;if(cfg.features?.showReviews===false)document.getElementById('avis').hidden=true;if(cfg.features?.showAdminLink===false)document.querySelector('.admin-link').hidden=true;
+    if(!socialLinks.children.length)socialLinks.hidden=true;if(cfg.features?.showReviews===false)document.getElementById('avis').hidden=true;
+    if(cfg.features?.showAdminLink===false){document.querySelectorAll('.admin-link').forEach(el=>el.hidden=true);const adminDemo=document.getElementById('adminDemo');if(adminDemo)adminDemo.hidden=true;}
+    if(cfg.features?.showDemoBadge===false){const adminDemo=document.getElementById('adminDemo');if(adminDemo)adminDemo.hidden=true;}
     await loadPublicData();applyRestaurant();applyBranding();drawFilters();drawMenu();drawHours();updateStatus();
+    initGalleryLightbox();
     initRevealAnimations();
     reservationForm.addEventListener('submit',submitReservation);document.querySelector('input[type="date"]').min=new Date().toISOString().slice(0,10);year.textContent=new Date().getFullYear();demoBadge.hidden=!!cfg.supabase?.enabled||cfg.features?.showDemoBadge===false;
   }
