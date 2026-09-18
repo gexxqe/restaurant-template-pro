@@ -42,6 +42,13 @@
     <label class="check"><input id="showAdminLink" type="checkbox" data-path="features.showAdminLink"> Afficher le lien administrateur</label>
     <label class="check"><input id="showDemoBadge" type="checkbox" data-path="features.showDemoBadge"> Afficher le badge démonstration</label>
   </fieldset>
+  <fieldset class="group"><legend>Réseaux sociaux et liens</legend><p class="notice">Laissez une adresse vide pour masquer le bouton.</p><div class="grid">
+    <div class="field full"><label for="facebookUrl">Facebook</label><input id="facebookUrl" type="url" data-social="0" placeholder="https://facebook.com/..."></div>
+    <div class="field full"><label for="instagramUrl">Instagram</label><input id="instagramUrl" type="url" data-social="1" placeholder="https://instagram.com/..."></div>
+    <div class="field full"><label for="tiktokUrl">TikTok</label><input id="tiktokUrl" type="url" data-social="2" placeholder="https://tiktok.com/@..."></div>
+    <div class="field"><label for="otherLabel">Nom de l’autre bouton</label><input id="otherLabel" data-social-label="3" placeholder="TripAdvisor"></div>
+    <div class="field"><label for="otherUrl">Adresse de l’autre bouton</label><input id="otherUrl" type="url" data-social="3" placeholder="https://..."></div>
+  </div></fieldset>
   <fieldset class="group"><legend>Réservations Supabase</legend><p class="notice">Activez uniquement après création d’un projet distinct pour le client. Utilisez une clé publishable, jamais une clé secrète ou service_role.</p>
     <label class="check"><input id="supabaseEnabled" type="checkbox" data-path="supabase.enabled"> Activer Supabase</label>
     <div class="grid"><div class="field full"><label for="supabaseUrl">Project URL</label><input id="supabaseUrl" type="url" data-path="supabase.url"></div><div class="field full"><label for="publishableKey">Publishable key</label><input id="publishableKey" data-path="supabase.publishableKey"></div></div>
