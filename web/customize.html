@@ -25,6 +25,11 @@
     <div class="field"><label for="city">Ville</label><input id="city" data-path="restaurant.city"></div>
     <div class="field full"><label for="mapsUrl">Lien Google Maps</label><input id="mapsUrl" type="url" data-path="restaurant.mapsUrl"></div>
   </div></fieldset>
+  <fieldset class="group"><legend>Application mobile</legend><p class="notice">À remplir uniquement si le client souhaite une application Android/iOS. Ces valeurs serviront à générer la configuration Capacitor.</p><div class="grid">
+    <div class="field"><label for="appName">Nom de l’application</label><input id="appName" data-path="app.name"></div>
+    <div class="field"><label for="appId">Identifiant application</label><input id="appId" data-path="app.id" placeholder="fr.restaurant.nom"></div>
+    <div class="field full"><button class="btn secondary" type="button" id="syncApp">Utiliser le nom du restaurant</button></div>
+  </div></fieldset>
   <fieldset class="group"><legend>Couleurs</legend><div class="grid">
     <div class="field"><label for="brand">Couleur principale</label><input id="brand" type="color" data-path="theme.brand"></div>
     <div class="field"><label for="brand2">Dégradé</label><input id="brand2" type="color" data-path="theme.brand2"></div>
@@ -53,7 +58,7 @@
     <label class="check"><input id="supabaseEnabled" type="checkbox" data-path="supabase.enabled"> Activer Supabase</label>
     <div class="grid"><div class="field full"><label for="supabaseUrl">Project URL</label><input id="supabaseUrl" type="url" data-path="supabase.url"></div><div class="field full"><label for="publishableKey">Publishable key</label><input id="publishableKey" data-path="supabase.publishableKey"></div></div>
   </fieldset>
-  <div class="actions"><button class="btn primary" type="button" id="download">Télécharger config.js</button><button class="btn secondary" type="button" id="copy">Copier le code</button><button class="btn secondary" type="button" id="reset">Réinitialiser</button></div><div class="ok" id="message"></div>
+  <div class="actions"><button class="btn primary" type="button" id="download">Télécharger config.js</button><button class="btn secondary" type="button" id="downloadApp">Télécharger capacitor.config.json</button><button class="btn secondary" type="button" id="copy">Copier le code</button><button class="btn secondary" type="button" id="reset">Réinitialiser</button></div><div class="ok" id="message"></div>
 </form>
 <aside class="panel preview"><div class="preview-hero" id="previewHero"><div><span class="preview-badge">★★★★★ <span id="previewRating"></span></span><h2 id="previewName"></h2><p id="previewTagline"></p><button class="btn primary" type="button">Réserver une table</button></div></div><div class="preview-contact"><strong id="previewAddress"></strong><br><span id="previewPhone"></span></div></aside></div></main>
 <script src="config.js"></script><script src="customize.js"></script></body></html>
