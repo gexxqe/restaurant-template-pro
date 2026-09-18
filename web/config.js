@@ -46,6 +46,12 @@ window.RESTAURANT_CONFIG = {
     { title: "Excellent moment", text: "Une carte équilibrée, de belles assiettes et un service attentionné.", label: "Cuisine & service" },
     { title: "À recommander", text: "Une adresse conviviale avec un très bon rapport qualité-prix.", label: "Ambiance & prix" }
   ],
+  socialLinks: [
+    { label: "Facebook", icon: "f", url: "" },
+    { label: "Instagram", icon: "◎", url: "" },
+    { label: "TikTok", icon: "♪", url: "" },
+    { label: "Autre lien", icon: "↗", url: "" }
+  ],
   features: { showReviews: true, showAdminLink: true, showDemoBadge: true },
   supabase: { enabled: false, url: "", publishableKey: "" }
 };
