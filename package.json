@@ -1,0 +1,24 @@
+{
+  "name": "restaurant-template-pro",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Restaurant Template Pro - Web, Android and iOS",
+  "scripts": {
+    "cap:sync": "npx cap sync",
+    "cap:copy": "npx cap copy",
+    "android:add": "npx cap add android",
+    "android:open": "npx cap open android",
+    "android:sync": "npx cap sync android",
+    "ios:add": "npx cap add ios",
+    "ios:open": "npx cap open ios",
+    "ios:sync": "npx cap sync ios"
+  },
+  "dependencies": {
+    "@capacitor/android": "latest",
+    "@capacitor/core": "latest",
+    "@capacitor/ios": "latest"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "latest"
+  }
+}
