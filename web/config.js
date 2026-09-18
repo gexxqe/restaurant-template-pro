@@ -17,6 +17,10 @@ window.RESTAURANT_CONFIG = {
     locale: "fr-FR"
   },
   theme: { brand: "#153b2c", brand2: "#245c43", accent: "#d6a64a", cream: "#f7f2e8" },
+  app: {
+    name: "Restaurant Template Pro",
+    id: "com.restaurant.templatepro"
+  },
   dailySpecial: {
     eyebrow: "Suggestion du chef",
     name: "Le plat du moment",
