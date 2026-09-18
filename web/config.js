@@ -53,5 +53,9 @@ window.RESTAURANT_CONFIG = {
     { label: "Autre lien", icon: "↗", url: "" }
   ],
   features: { showReviews: true, showAdminLink: true, showDemoBadge: true },
-  supabase: { enabled: false, url: "", publishableKey: "" }
+  supabase: {
+    enabled: true,
+    url: "https://vranjjsfxiygohaqyfxw.supabase.co",
+    publishableKey: "sb_publishable_jR078H28G0QsN0LrjNPTtQ_c488Pqxu"
+  }
 };
