@@ -4,6 +4,7 @@
   let restaurant = {...cfg.restaurant};
   let menu = [...(cfg.menu || [])];
   let schedule = [];
+  let dynamicHeroImage = '';
   let selected = 'Tout';
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const setText = (selector, value) => document.querySelectorAll(selector).forEach(el => { el.textContent = value; });
@@ -28,7 +29,7 @@
   }
   function applyBranding(){
     const branding=cfg.branding||{};
-    const heroImage=branding.heroImageDataUrl||branding.heroImageUrl||'';
+    const heroImage=dynamicHeroImage||branding.heroImageDataUrl||branding.heroImageUrl||'';
     const heroCard=document.querySelector('.hero-card');
     if(heroCard){
       if(heroImage){
@@ -78,7 +79,7 @@
         rest('menu_items?select=*&is_available=eq.true&order=sort_order.asc,created_at.asc'),
         rest('opening_hours?select=*&order=day_index.asc')
       ]);
-      if(settings[0]){const s=settings[0];restaurant={...restaurant,name:s.name,phoneDisplay:s.phone,phoneHref:String(s.phone||'').replace(/[^+\d]/g,''),address:s.address,city:s.city_postcode,email:s.email,tagline:s.tagline,description:s.description,rating:s.rating};heroTitle.textContent=s.hero_title||s.name;heroText.textContent=s.hero_text||s.tagline;specialEyebrow.textContent=s.daily_label||'';specialName.textContent=s.daily_title||'';specialDescription.textContent=s.daily_description||'';specialPrice.textContent=money(s.daily_price||0);if(s.daily_image_url){specialArt.classList.add('has-photo');specialArt.replaceChildren();specialArt.style.backgroundImage=`url("${s.daily_image_url}")`;specialArt.style.backgroundSize='cover';specialArt.style.backgroundPosition='center';specialArt.style.backgroundRepeat='no-repeat';specialArt.style.opacity='1'}else{specialArt.classList.remove('has-photo');specialArt.style.backgroundImage='';specialArt.style.backgroundSize='';specialArt.style.backgroundPosition='';specialArt.style.backgroundRepeat='';specialArt.style.opacity='1'}}
+      if(settings[0]){const s=settings[0];restaurant={...restaurant,name:s.name,phoneDisplay:s.phone,phoneHref:String(s.phone||'').replace(/[^+\d]/g,''),address:s.address,city:s.city_postcode,email:s.email,tagline:s.tagline,description:s.description,rating:s.rating};dynamicHeroImage=s.hero_image_url||'';heroTitle.textContent=s.hero_title||s.name;heroText.textContent=s.hero_text||s.tagline;specialEyebrow.textContent=s.daily_label||'';specialName.textContent=s.daily_title||'';specialDescription.textContent=s.daily_description||'';specialPrice.textContent=money(s.daily_price||0);if(s.daily_image_url){specialArt.classList.add('has-photo');specialArt.replaceChildren();specialArt.style.backgroundImage=`url("${s.daily_image_url}")`;specialArt.style.backgroundSize='cover';specialArt.style.backgroundPosition='center';specialArt.style.backgroundRepeat='no-repeat';specialArt.style.opacity='1'}else{specialArt.classList.remove('has-photo');specialArt.style.backgroundImage='';specialArt.style.backgroundSize='';specialArt.style.backgroundPosition='';specialArt.style.backgroundRepeat='';specialArt.style.opacity='1'}}
       if(items.length){menu=items.map(item=>({category:item.category,name:item.name,description:item.description,price:Number(item.price),vegetarian:item.is_vegetarian}));}
       if(opening.length){schedule=opening.map(entry=>({day:entry.day_name,slots:entry.is_closed?[]:[[entry.lunch_start,entry.lunch_end],[entry.dinner_start,entry.dinner_end]].filter(pair=>pair[0]&&pair[1]).map(pair=>pair.map(toMinutes))}));}
     }catch(error){console.warn('Supabase public data unavailable; using config fallback.',error);}
