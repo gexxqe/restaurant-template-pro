@@ -38,10 +38,6 @@ jobs:
       - name: Sync iOS
         run: npx cap sync ios
 
-      - name: Install CocoaPods
-        working-directory: ios/App
-        run: pod install
-
       - name: Build iOS Simulator app
         working-directory: ios/App
         run: |
