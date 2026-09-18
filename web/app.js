@@ -26,6 +26,44 @@
     }
     document.title=`${restaurant.name} — Restaurant`;
   }
+  function applyBranding(){
+    const branding=cfg.branding||{};
+    const heroImage=branding.heroImageDataUrl||branding.heroImageUrl||'';
+    const heroCard=document.querySelector('.hero-card');
+    if(heroCard){
+      if(heroImage){
+        heroCard.classList.add('has-photo');
+        heroCard.style.backgroundImage=`linear-gradient(90deg,rgba(8,27,19,.78),rgba(8,27,19,.35)),url("${heroImage}")`;
+        heroCard.style.backgroundSize='cover';
+        heroCard.style.backgroundPosition='center';
+        heroCard.style.backgroundRepeat='no-repeat';
+      }else{
+        heroCard.classList.remove('has-photo');
+        heroCard.style.backgroundImage='';
+        heroCard.style.backgroundSize='';
+        heroCard.style.backgroundPosition='';
+        heroCard.style.backgroundRepeat='';
+      }
+    }
+
+    const favicon=branding.faviconDataUrl||branding.faviconUrl||branding.logoDataUrl||branding.logoUrl||'';
+    const faviconLink=document.getElementById('dynamicFavicon');
+    if(faviconLink&&favicon)faviconLink.href=favicon;
+
+    const gallery=(branding.galleryImages||[]).filter(Boolean);
+    const gallerySection=document.getElementById('galerie');
+    const galleryGrid=document.getElementById('galleryGrid');
+    if(gallerySection&&galleryGrid){
+      if(gallery.length){
+        galleryGrid.innerHTML=gallery.map((src,index)=>`<figure class="gallery-item"><img src="${esc(src)}" alt="Photo du restaurant ${index+1}" loading="lazy"></figure>`).join('');
+        gallerySection.hidden=false;
+      }else{
+        galleryGrid.replaceChildren();
+        gallerySection.hidden=true;
+      }
+    }
+  }
+
   function drawFilters(){const cats=['Tout',...new Set(menu.map(item=>item.category))];if(!cats.includes(selected))selected='Tout';filters.innerHTML=cats.map(c=>`<button class="filter ${c===selected?'active':''}" data-cat="${esc(c)}">${esc(c)}</button>`).join('');filters.querySelectorAll('button').forEach(button=>button.onclick=()=>{selected=button.dataset.cat;drawFilters();drawMenu();});}
   function drawMenu(){const rows=selected==='Tout'?menu:menu.filter(item=>item.category===selected);menuGrid.innerHTML=rows.map(item=>`<article class="dish"><div><h3>${esc(item.name)}</h3><p>${esc(item.description)}</p>${item.vegetarian?'<span class="tag">🌿 Végétarien</span>':''}</div><div class="dish-price">${money(item.price)}</div></article>`).join('');}
   function drawHours(){hours.innerHTML=schedule.map(entry=>`<div class="hour"><strong>${esc(entry.day)}</strong><span>${entry.slots.length?entry.slots.map(slot=>`${fmt(slot[0])}–${fmt(slot[1])}`).join(' • '):'Fermé'}</span></div>`).join('');}
@@ -52,7 +90,7 @@
     reviewsGrid.innerHTML=(cfg.reviews||[]).map(item=>`<article class="review"><div class="stars">★★★★★</div><h3>${esc(item.title)}</h3><p>${esc(item.text)}</p><strong>${esc(item.label)}</strong></article>`).join('');
     socialLinks.innerHTML=(cfg.socialLinks||[]).filter(item=>item.url&&item.url.trim()).map(item=>`<a class="social-link" href="${esc(item.url)}" target="_blank" rel="noopener noreferrer"><span class="social-icon">${esc(item.icon||'↗')}</span>${esc(item.label)}</a>`).join('');
     if(!socialLinks.children.length)socialLinks.hidden=true;if(cfg.features?.showReviews===false)document.getElementById('avis').hidden=true;if(cfg.features?.showAdminLink===false)document.querySelector('.admin-link').hidden=true;
-    await loadPublicData();applyRestaurant();drawFilters();drawMenu();drawHours();updateStatus();
+    await loadPublicData();applyRestaurant();applyBranding();drawFilters();drawMenu();drawHours();updateStatus();
     reservationForm.addEventListener('submit',submitReservation);document.querySelector('input[type="date"]').min=new Date().toISOString().slice(0,10);year.textContent=new Date().getFullYear();demoBadge.hidden=!!cfg.supabase?.enabled||cfg.features?.showDemoBadge===false;
   }
   init();
