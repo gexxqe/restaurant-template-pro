@@ -46,3 +46,17 @@ Le configurateur visuel permet aussi de préparer la version Android/iOS d’un 
 - remplacez ensuite le fichier racine `capacitor.config.json` avant de générer les builds Android/iOS.
 
 Le bouton « Utiliser le nom du restaurant » prépare automatiquement un nom d’application et un identifiant de départ.
+
+
+## Images du site
+
+Le configurateur visuel permet aussi de préparer les images principales du client :
+
+- logo du restaurant;
+- image principale de la zone d’accueil;
+- favicon;
+- galerie de photos.
+
+L’image principale remplace automatiquement le décor de la zone d’accueil. La galerie reste masquée tant qu’aucune photo n’est ajoutée.
+
+Pour garder un fichier `config.js` raisonnable, utilisez des images déjà optimisées. Le configurateur limite la taille des fichiers importés.
