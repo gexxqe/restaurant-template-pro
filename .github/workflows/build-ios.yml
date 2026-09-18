@@ -41,12 +41,12 @@ jobs:
       - name: Build iOS Simulator app
         working-directory: ios/App
         run: |
-          xcodebuild             -workspace App.xcworkspace             -scheme App             -configuration Debug             -sdk iphonesimulator             -derivedDataPath build             CODE_SIGNING_ALLOWED=NO             build
+          xcodebuild -project App.xcodeproj -scheme App -configuration Debug -sdk iphonesimulator -derivedDataPath build CODE_SIGNING_ALLOWED=NO build
 
       - name: Package simulator app
         working-directory: ios/App
         run: |
-          ditto -c -k --sequesterRsrc --keepParent             build/Build/Products/Debug-iphonesimulator/App.app             Restaurant-Template-Pro-iOS-Simulator.zip
+          ditto -c -k --sequesterRsrc --keepParent build/Build/Products/Debug-iphonesimulator/App.app Restaurant-Template-Pro-iOS-Simulator.zip
 
       - name: Upload iOS simulator build
         uses: actions/upload-artifact@v4
