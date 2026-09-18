@@ -7,6 +7,7 @@ on:
       - ".github/workflows/generate-native.yml"
       - "package.json"
       - "capacitor.config.json"
+      - "resources/**"
   workflow_dispatch:
 
 permissions:
@@ -34,6 +35,7 @@ jobs:
           rm -rf android ios
           npx cap add android
           npx cap add ios
+          npx capacitor-assets generate
           npx cap sync
 
       - name: Commit generated projects
