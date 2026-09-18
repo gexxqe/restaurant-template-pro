@@ -11,7 +11,8 @@
     "android:sync": "npx cap sync android",
     "ios:add": "npx cap add ios",
     "ios:open": "npx cap open ios",
-    "ios:sync": "npx cap sync ios"
+    "ios:sync": "npx cap sync ios",
+    "assets:generate": "npx capacitor-assets generate"
   },
   "dependencies": {
     "@capacitor/android": "latest",
@@ -19,6 +20,7 @@
     "@capacitor/ios": "latest"
   },
   "devDependencies": {
-    "@capacitor/cli": "latest"
+    "@capacitor/cli": "latest",
+    "@capacitor/assets": "latest"
   }
 }
