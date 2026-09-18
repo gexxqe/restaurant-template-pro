@@ -18,6 +18,12 @@
     document.querySelectorAll('[data-phone-link]').forEach(el=>{el.href=`tel:${restaurant.phoneHref}`;});
     document.querySelectorAll('[data-email-link]').forEach(el=>{el.href=`mailto:${restaurant.email}`;});
     document.querySelectorAll('[data-maps-link]').forEach(el=>{el.href=restaurant.mapsUrl;});
+    const logoUrl=cfg.branding?.logoDataUrl||cfg.branding?.logoUrl||'';
+    const logo=document.getElementById('brandLogo'),logoImage=document.getElementById('brandLogoImage'),logoFallback=document.getElementById('brandLogoFallback');
+    if(logo&&logoImage&&logoFallback){
+      if(logoUrl){logoImage.src=logoUrl;logoImage.alt='Logo '+restaurant.name;logoImage.hidden=false;logoFallback.hidden=true;logo.classList.add('has-image');}
+      else{logoImage.removeAttribute('src');logoImage.hidden=true;logoFallback.hidden=false;logo.classList.remove('has-image');}
+    }
     document.title=`${restaurant.name} — Restaurant`;
   }
   function drawFilters(){const cats=['Tout',...new Set(menu.map(item=>item.category))];if(!cats.includes(selected))selected='Tout';filters.innerHTML=cats.map(c=>`<button class="filter ${c===selected?'active':''}" data-cat="${esc(c)}">${esc(c)}</button>`).join('');filters.querySelectorAll('button').forEach(button=>button.onclick=()=>{selected=button.dataset.cat;drawFilters();drawMenu();});}
