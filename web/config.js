@@ -21,10 +21,17 @@ window.RESTAURANT_CONFIG = {
     logoDataUrl: "",
     logoUrl: "",
     heroImageDataUrl: "",
-    heroImageUrl: "",
+    heroImageUrl: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1800&q=85",
     faviconDataUrl: "",
     faviconUrl: "",
-    galleryImages: []
+    galleryImages: [
+          "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=1200&q=82",
+          "https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?auto=format&fit=crop&w=1200&q=82"
+    ]
   },
   app: {
     name: "Restaurant Template Pro",
