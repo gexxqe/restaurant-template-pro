@@ -19,7 +19,12 @@ window.RESTAURANT_CONFIG = {
   theme: { brand: "#153b2c", brand2: "#245c43", accent: "#d6a64a", cream: "#f7f2e8" },
   branding: {
     logoDataUrl: "",
-    logoUrl: ""
+    logoUrl: "",
+    heroImageDataUrl: "",
+    heroImageUrl: "",
+    faviconDataUrl: "",
+    faviconUrl: "",
+    galleryImages: []
   },
   app: {
     name: "Restaurant Template Pro",
