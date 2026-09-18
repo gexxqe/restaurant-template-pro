@@ -84,6 +84,17 @@
     }catch(error){console.warn('Supabase public data unavailable; using config fallback.',error);}
   }
   async function submitReservation(event){event.preventDefault();const form=event.currentTarget,button=form.querySelector('button[type="submit"]'),payload=Object.fromEntries(new FormData(form));button.disabled=true;success.style.display='block';success.style.background='rgba(47,138,87,.1)';success.style.color='#206b42';try{if(cfg.supabase?.enabled){await rest('reservations',{method:'POST',headers:{Prefer:'return=minimal'},body:JSON.stringify({customer_name:payload.name,phone:payload.phone,reservation_date:payload.date,reservation_time:payload.time,guest_count:Number(payload.guests),message:payload.message||null,status:'pending'})});success.textContent='✅ Votre demande de réservation a bien été envoyée.';}else{const list=JSON.parse(localStorage.getItem('restaurant_demo_reservations')||'[]');list.unshift({...payload,createdAt:new Date().toISOString()});localStorage.setItem('restaurant_demo_reservations',JSON.stringify(list));success.textContent='✅ Démonstration : demande enregistrée uniquement sur cet appareil.';}form.reset();}catch(error){success.style.background='#fff0ee';success.style.color='#a33e38';success.textContent='❌ La réservation n’a pas pu être envoyée. Merci de réessayer.';}finally{button.disabled=false;}}
+  function initRevealAnimations(){
+    const targets=[...document.querySelectorAll('.section .shell, .quick, .status')].filter(el=>!el.closest('[hidden]'));
+    targets.forEach(el=>el.classList.add('reveal'));
+    const observer=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target);}
+      });
+    },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+    targets.forEach(el=>observer.observe(el));
+  }
+
   async function init(){
     Object.entries(cfg.theme||{}).forEach(([key,value])=>document.documentElement.style.setProperty(`--${key}`,value));
     heroTitle.textContent=restaurant.name||'';heroText.textContent=restaurant.tagline||'';const special=cfg.dailySpecial||{};specialEyebrow.textContent=special.eyebrow||'';specialName.textContent=special.name||'';specialDescription.textContent=special.description||'';specialPrice.textContent=money(special.price||0);
@@ -91,6 +102,7 @@
     socialLinks.innerHTML=(cfg.socialLinks||[]).filter(item=>item.url&&item.url.trim()).map(item=>`<a class="social-link" href="${esc(item.url)}" target="_blank" rel="noopener noreferrer"><span class="social-icon">${esc(item.icon||'↗')}</span>${esc(item.label)}</a>`).join('');
     if(!socialLinks.children.length)socialLinks.hidden=true;if(cfg.features?.showReviews===false)document.getElementById('avis').hidden=true;if(cfg.features?.showAdminLink===false)document.querySelector('.admin-link').hidden=true;
     await loadPublicData();applyRestaurant();applyBranding();drawFilters();drawMenu();drawHours();updateStatus();
+    initRevealAnimations();
     reservationForm.addEventListener('submit',submitReservation);document.querySelector('input[type="date"]').min=new Date().toISOString().slice(0,10);year.textContent=new Date().getFullYear();demoBadge.hidden=!!cfg.supabase?.enabled||cfg.features?.showDemoBadge===false;
   }
   init();
