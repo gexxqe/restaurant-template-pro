@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Configurateur — Restaurant Template Pro</title>
+  <style>
+    :root{--brand:#153b2c;--accent:#d6a64a;--cream:#f7f2e8;--paper:#fff;--ink:#1e2923;--line:#ded8cc;--muted:#68726c}*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}.shell{max-width:1180px;margin:auto;padding:26px 18px 70px}h1,h2{font-family:Georgia,serif;color:var(--brand)}h1{font-size:clamp(32px,6vw,54px);margin:8px 0}.lead{color:var(--muted);line-height:1.6;max-width:760px}.layout{display:grid;grid-template-columns:1fr .8fr;gap:22px;align-items:start;margin-top:24px}.panel{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:22px;box-shadow:0 16px 45px #153b2c10}.group{border:0;padding:0;margin:0 0 28px}.group legend{font-family:Georgia,serif;font-size:23px;color:var(--brand);font-weight:800;margin-bottom:14px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.field{display:grid;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:12px;font-weight:850;color:var(--brand)}input,textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:11px 12px;background:white}input[type=color]{height:46px;padding:4px}.check{display:flex;gap:9px;align-items:center;margin-top:10px;font-weight:750}.check input{width:auto}.actions{display:flex;gap:10px;flex-wrap:wrap;position:sticky;bottom:12px;background:#fffdf8e8;backdrop-filter:blur(12px);padding:12px;border:1px solid var(--line);border-radius:18px}.btn{border:0;border-radius:999px;padding:12px 17px;font-weight:850;cursor:pointer}.primary{background:var(--accent);color:#2e260f}.secondary{background:white;border:1px solid var(--line);color:var(--brand)}.preview{position:sticky;top:20px;overflow:hidden;padding:0}.preview-hero{min-height:430px;padding:28px;display:flex;align-items:flex-end;color:white;background:radial-gradient(circle at 80% 15%,#d6a64a66,transparent 27%),linear-gradient(135deg,#245c43,var(--brand) 65%,#081b13)}.preview-badge{display:inline-block;border:1px solid #ffffff44;background:#0003;border-radius:999px;padding:7px 10px;font-size:12px}.preview h2{font-size:48px;color:white;margin:15px 0 9px}.preview p{line-height:1.55;color:#f5efe3}.preview-contact{padding:20px;background:white;color:var(--brand)}.notice{font-size:12px;color:var(--muted);line-height:1.5}.ok{display:none;color:#216c43;font-weight:800;margin-top:10px}@media(max-width:850px){.layout{grid-template-columns:1fr}.preview{position:static;order:-1}.grid{grid-template-columns:1fr}.field.full{grid-column:auto}.preview-hero{min-height:330px}.preview h2{font-size:40px}}
+  </style>
+</head>
+<body><main class="shell"><div class="eyebrow">Restaurant Template Pro</div><h1>Configurateur visuel</h1><p class="lead">Remplissez les champs, vérifiez l’aperçu puis téléchargez le nouveau <strong>config.js</strong>. Les données saisies restent dans votre navigateur.</p>
+<div class="layout"><form class="panel" id="editor">
+  <fieldset class="group"><legend>Identité</legend><div class="grid">
+    <div class="field"><label for="name">Nom du restaurant</label><input id="name" data-path="restaurant.name"></div>
+    <div class="field"><label for="shortName">Initiales</label><input id="shortName" data-path="restaurant.shortName" maxlength="4"></div>
+    <div class="field full"><label for="tagline">Slogan</label><input id="tagline" data-path="restaurant.tagline"></div>
+    <div class="field full"><label for="description">Description</label><textarea id="description" data-path="restaurant.description" rows="3"></textarea></div>
+    <div class="field"><label for="rating">Note affichée</label><input id="rating" data-path="restaurant.rating"></div>
+    <div class="field"><label for="currency">Devise</label><input id="currency" data-path="restaurant.currency" maxlength="3"></div>
+  </div></fieldset>
+  <fieldset class="group"><legend>Contact</legend><div class="grid">
+    <div class="field"><label for="phoneDisplay">Téléphone affiché</label><input id="phoneDisplay" data-path="restaurant.phoneDisplay"></div>
+    <div class="field"><label for="phoneHref">Téléphone international</label><input id="phoneHref" data-path="restaurant.phoneHref"></div>
+    <div class="field full"><label for="email">E-mail</label><input id="email" type="email" data-path="restaurant.email"></div>
+    <div class="field"><label for="address">Adresse</label><input id="address" data-path="restaurant.address"></div>
+    <div class="field"><label for="city">Ville</label><input id="city" data-path="restaurant.city"></div>
+    <div class="field full"><label for="mapsUrl">Lien Google Maps</label><input id="mapsUrl" type="url" data-path="restaurant.mapsUrl"></div>
+  </div></fieldset>
+  <fieldset class="group"><legend>Couleurs</legend><div class="grid">
+    <div class="field"><label for="brand">Couleur principale</label><input id="brand" type="color" data-path="theme.brand"></div>
+    <div class="field"><label for="brand2">Dégradé</label><input id="brand2" type="color" data-path="theme.brand2"></div>
+    <div class="field"><label for="accent">Couleur accent</label><input id="accent" type="color" data-path="theme.accent"></div>
+    <div class="field"><label for="cream">Arrière-plan</label><input id="cream" type="color" data-path="theme.cream"></div>
+  </div></fieldset>
+  <fieldset class="group"><legend>Plat du moment</legend><div class="grid">
+    <div class="field"><label for="specialEyebrow">Petit titre</label><input id="specialEyebrow" data-path="dailySpecial.eyebrow"></div>
+    <div class="field"><label for="specialName">Nom</label><input id="specialName" data-path="dailySpecial.name"></div>
+    <div class="field full"><label for="specialDescription">Description</label><textarea id="specialDescription" data-path="dailySpecial.description" rows="3"></textarea></div>
+    <div class="field"><label for="specialPrice">Prix</label><input id="specialPrice" type="number" step="0.10" min="0" data-path="dailySpecial.price"></div>
+  </div></fieldset>
+  <fieldset class="group"><legend>Options</legend>
+    <label class="check"><input id="showReviews" type="checkbox" data-path="features.showReviews"> Afficher les avis</label>
+    <label class="check"><input id="showAdminLink" type="checkbox" data-path="features.showAdminLink"> Afficher le lien administrateur</label>
+    <label class="check"><input id="showDemoBadge" type="checkbox" data-path="features.showDemoBadge"> Afficher le badge démonstration</label>
+  </fieldset>
+  <fieldset class="group"><legend>Réservations Supabase</legend><p class="notice">Activez uniquement après création d’un projet distinct pour le client. Utilisez une clé publishable, jamais une clé secrète ou service_role.</p>
+    <label class="check"><input id="supabaseEnabled" type="checkbox" data-path="supabase.enabled"> Activer Supabase</label>
+    <div class="grid"><div class="field full"><label for="supabaseUrl">Project URL</label><input id="supabaseUrl" type="url" data-path="supabase.url"></div><div class="field full"><label for="publishableKey">Publishable key</label><input id="publishableKey" data-path="supabase.publishableKey"></div></div>
+  </fieldset>
+  <div class="actions"><button class="btn primary" type="button" id="download">Télécharger config.js</button><button class="btn secondary" type="button" id="copy">Copier le code</button><button class="btn secondary" type="button" id="reset">Réinitialiser</button></div><div class="ok" id="message"></div>
+</form>
+<aside class="panel preview"><div class="preview-hero" id="previewHero"><div><span class="preview-badge">★★★★★ <span id="previewRating"></span></span><h2 id="previewName"></h2><p id="previewTagline"></p><button class="btn primary" type="button">Réserver une table</button></div></div><div class="preview-contact"><strong id="previewAddress"></strong><br><span id="previewPhone"></span></div></aside></div></main>
+<script src="config.js"></script><script src="customize.js"></script></body></html>
