@@ -6,9 +6,17 @@
   const get = path => path.split('.').reduce((value, key) => value?.[key], state);
   const set = (path, value) => { const keys=path.split('.'); const last=keys.pop(); const target=keys.reduce((value,key)=>value[key],state); target[last]=value; };
   function fill(){fields.forEach(field=>{const value=get(field.dataset.path);if(field.type==='checkbox')field.checked=!!value;else field.value=value??'';});socialFields.forEach(field=>field.value=state.socialLinks?.[Number(field.dataset.social)]?.url||'');document.querySelectorAll('[data-social-label]').forEach(field=>field.value=state.socialLinks?.[Number(field.dataset.socialLabel)]?.label||'');render();}
-  function render(){const r=state.restaurant,t=state.theme;previewName.textContent=r.name;previewTagline.textContent=r.tagline;previewRating.textContent=r.rating;previewAddress.textContent=`${r.address}, ${r.city}`;previewPhone.textContent=r.phoneDisplay;previewHero.style.background=`radial-gradient(circle at 80% 15%,${t.accent}66,transparent 27%),linear-gradient(135deg,${t.brand2},${t.brand} 65%,#081b13)`;document.documentElement.style.setProperty('--brand',t.brand);document.documentElement.style.setProperty('--accent',t.accent);document.documentElement.style.setProperty('--cream',t.cream);}
+  function render(){const r=state.restaurant,t=state.theme;previewName.textContent=r.name;previewTagline.textContent=r.tagline;previewRating.textContent=r.rating;previewAddress.textContent=`${r.address}, ${r.city}`;previewPhone.textContent=r.phoneDisplay;previewHero.style.background=`radial-gradient(circle at 80% 15%,${t.accent}66,transparent 27%),linear-gradient(135deg,${t.brand2},${t.brand} 65%,#081b13)`;document.documentElement.style.setProperty('--brand',t.brand);document.documentElement.style.setProperty('--accent',t.accent);document.documentElement.style.setProperty('--cream',t.cream);const logo=state.branding?.logoDataUrl||state.branding?.logoUrl||'';logoPreviewFallback.textContent=r.shortName||'';if(logo){logoPreviewImage.src=logo;logoPreviewImage.hidden=false;logoPreviewFallback.hidden=true}else{logoPreviewImage.removeAttribute('src');logoPreviewImage.hidden=true;logoPreviewFallback.hidden=false}}
   fields.forEach(field=>field.addEventListener('input',()=>{let value=field.type==='checkbox'?field.checked:field.type==='number'?Number(field.value):field.value;set(field.dataset.path,value);render();}));
   socialFields.forEach(field=>field.addEventListener('input',()=>{state.socialLinks[Number(field.dataset.social)].url=field.value;}));
+  logoFile.addEventListener('change',()=>{
+    const file=logoFile.files?.[0];if(!file)return;
+    if(file.size>2*1024*1024){flash('Logo trop volumineux : 2 Mo maximum.');logoFile.value='';return;}
+    const reader=new FileReader();
+    reader.onload=()=>{state.branding=state.branding||{};state.branding.logoDataUrl=String(reader.result||'');state.branding.logoUrl='';render();flash('Logo ajouté ✅');};
+    reader.readAsDataURL(file);
+  });
+  removeLogo.onclick=()=>{state.branding=state.branding||{};state.branding.logoDataUrl='';state.branding.logoUrl='';logoFile.value='';render();flash('Logo supprimé.');};
   document.querySelectorAll('[data-social-label]').forEach(field=>field.addEventListener('input',()=>{state.socialLinks[Number(field.dataset.socialLabel)].label=field.value;}));
   function code(){return `// Configuration générée avec Restaurant Template Pro\nwindow.RESTAURANT_CONFIG = ${JSON.stringify(state,null,2)};\n`;}
   function capacitorCode(){
