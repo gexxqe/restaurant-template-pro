@@ -26,6 +26,8 @@
   download.onclick=()=>{const blob=new Blob([code()],{type:'text/javascript;charset=utf-8'}),url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='config.js';link.click();URL.revokeObjectURL(url);flash('Fichier config.js téléchargé ✅');};
   downloadApp.onclick=()=>{const blob=new Blob([capacitorCode()],{type:'application/json;charset=utf-8'}),url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='capacitor.config.json';link.click();URL.revokeObjectURL(url);flash('Configuration application téléchargée ✅');};
   syncApp.onclick=()=>{state.app=state.app||{};state.app.name=state.restaurant.name||'Restaurant';state.app.id='fr.restaurant.'+slugPart(state.restaurant.name).replace(/\./g,'');fill();flash('Nom et identifiant application préparés ✅');};
+  modeDemo.onclick=()=>{state.features.showDemoBadge=true;state.features.showAdminLink=true;fill();flash('Mode démonstration activé ✅');};
+  modeClient.onclick=()=>{state.features.showDemoBadge=false;state.features.showAdminLink=false;fill();flash('Configuration prête pour le client ✅');};
   copy.onclick=async()=>{await navigator.clipboard.writeText(code());flash('Code copié ✅');};
   reset.onclick=()=>{state=JSON.parse(JSON.stringify(original));fill();flash('Configuration réinitialisée.');};
   fill();
