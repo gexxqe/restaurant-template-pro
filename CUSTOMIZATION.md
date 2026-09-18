@@ -1,6 +1,8 @@
 # Personnaliser un nouveau restaurant
 
-Dans la majorité des cas, modifiez uniquement `web/config.js`.
+Ouvrez `web/customize.html` dans le navigateur pour utiliser le configurateur visuel, ou modifiez directement `web/config.js`.
+
+Le configurateur permet de prévisualiser l’identité, les contacts et les couleurs, puis de télécharger un nouveau `config.js`. Il ne publie rien automatiquement.
 
 ## Checklist client
 
