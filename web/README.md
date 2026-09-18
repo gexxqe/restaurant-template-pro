@@ -4,7 +4,7 @@ Template responsive et réutilisable : vitrine, carte, horaires, avis, contact, 
 
 ## Personnalisation rapide
 
-Modifiez `config.js` pour changer le nom, le slogan, le téléphone, l’e-mail, l’adresse, Google Maps, la note, les couleurs et la devise.
+Modifiez `config.js` pour changer le nom, le slogan, les contacts, les couleurs, le plat du jour, la carte, les horaires, les avis et les fonctions visibles. Aucun autre fichier n’est nécessaire pour une personnalisation standard.
 
 Le site démarre en **mode démonstration**. Les réservations restent dans le navigateur et aucune donnée n’est envoyée au restaurant d’origine.
 
