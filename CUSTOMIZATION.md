@@ -34,3 +34,15 @@ Utilisez `slots: []` pour un jour fermé.
 - uniquement une clé publishable dans `config.js`;
 - jamais de clé secrète ou `service_role` dans le site;
 - RLS activé sur toutes les tables exposées.
+
+
+## Application mobile
+
+Le configurateur visuel permet aussi de préparer la version Android/iOS d’un client.
+
+- renseignez le nom de l’application;
+- utilisez un identifiant unique, par exemple `fr.restaurant.nomdurrestaurant`;
+- téléchargez `capacitor.config.json` uniquement si le client commande l’application;
+- remplacez ensuite le fichier racine `capacitor.config.json` avant de générer les builds Android/iOS.
+
+Le bouton « Utiliser le nom du restaurant » prépare automatiquement un nom d’application et un identifiant de départ.
