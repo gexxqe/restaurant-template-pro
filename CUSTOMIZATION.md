@@ -11,7 +11,8 @@ Le configurateur permet de prévisualiser l’identité, les contacts et les cou
 3. Choisir les quatre couleurs dans `theme`.
 4. Remplir `dailySpecial`, `menu`, `openingHours` et `reviews`.
 5. Masquer les éléments inutiles dans `features` avec `false`.
-6. Créer un projet Supabase distinct pour le client avant d’activer les réservations réelles.
+6. Ajouter Facebook, Instagram, TikTok ou d’autres boutons dans `socialLinks`. Une URL vide masque automatiquement le bouton.
+7. Créer un projet Supabase distinct pour le client avant d’activer les réservations réelles.
 
 ## Format d’un plat
 
