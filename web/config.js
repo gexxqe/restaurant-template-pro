@@ -76,6 +76,6 @@ window.RESTAURANT_CONFIG = {
   supabase: {
     enabled: true,
     url: "https://vranjjsfxiygohaqyfxw.supabase.co",
-    publishableKey: "sb_publishable_jR078H28G0QsN0LrjNPTtQ_c488Pqxu"
+    publishableKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZyYW5qanNmeGl5Z29oYXF5Znh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk2OTg0MzQsImV4cCI6MjEwNTI3NDQzNH0.DOqYjTcShDjOYYo1ijWOV7URf_7NejvEFM_dUWKwN7s"
   }
 };
