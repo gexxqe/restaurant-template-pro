@@ -11,3 +11,5 @@ Base professionnelle et neutre destinée à créer rapidement un site pour un re
 - déploiement automatique sur GitHub Pages.
 
 Commencez par `CUSTOMIZATION.md`, puis modifiez uniquement `web/config.js` pour préparer un nouveau client.
+
+Le configurateur visuel est disponible dans `web/customize.html` (ou à l’adresse `/customize.html` une fois le site publié).
