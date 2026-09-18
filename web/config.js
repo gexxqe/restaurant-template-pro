@@ -1,3 +1,4 @@
+// Configuration centrale du restaurant — personnalisez ce fichier.
 window.RESTAURANT_CONFIG = {
   restaurant: {
     name: "Maison Saveur",
