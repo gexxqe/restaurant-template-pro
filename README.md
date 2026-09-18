@@ -10,4 +10,4 @@ Base professionnelle et neutre destinée à créer rapidement un site pour un re
 - espace administrateur à connecter au projet Supabase de chaque client;
 - déploiement automatique sur GitHub Pages.
 
-Consultez `web/README.md` pour la personnalisation et la mise en ligne.
+Commencez par `CUSTOMIZATION.md`, puis modifiez uniquement `web/config.js` pour préparer un nouveau client.
