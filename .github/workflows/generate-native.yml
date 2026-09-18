@@ -47,5 +47,6 @@ jobs:
             echo "No native changes to commit."
           else
             git commit -m "Generate Android and iOS Capacitor projects"
+            git pull --rebase origin main
             git push
           fi
