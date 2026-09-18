@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <rect width="1024" height="1024" rx="220" fill="#153b2c"/>
+  <circle cx="512" cy="512" r="275" fill="#fffdf8" stroke="#d6a64a" stroke-width="44"/>
+  <circle cx="512" cy="512" r="190" fill="none" stroke="#e7ded0" stroke-width="24"/>
+  <g fill="none" stroke="#d6a64a" stroke-width="30" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M265 340v360"/>
+    <path d="M215 290v115c0 45 22 78 50 78s50-33 50-78V290"/>
+    <path d="M235 290v105M265 290v105M295 290v105"/>
+    <path d="M760 320v380"/>
+    <path d="M760 320c55 28 80 82 80 138 0 59-28 111-80 145"/>
+  </g>
+  <text x="512" y="535" text-anchor="middle" font-family="Georgia, serif" font-size="74" font-style="italic" fill="#153b2c">Bon appétit</text>
+</svg>
