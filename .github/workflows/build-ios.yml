@@ -1,0 +1,60 @@
+name: Build iOS Simulator App
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/build-ios.yml"
+      - "ios/**"
+      - "web/**"
+      - "resources/**"
+      - "package.json"
+      - "package-lock.json"
+      - "capacitor.config.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-ios:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate app assets
+        run: npx capacitor-assets generate --ios
+
+      - name: Sync iOS
+        run: npx cap sync ios
+
+      - name: Install CocoaPods
+        working-directory: ios/App
+        run: pod install
+
+      - name: Build iOS Simulator app
+        working-directory: ios/App
+        run: |
+          xcodebuild             -workspace App.xcworkspace             -scheme App             -configuration Debug             -sdk iphonesimulator             -derivedDataPath build             CODE_SIGNING_ALLOWED=NO             build
+
+      - name: Package simulator app
+        working-directory: ios/App
+        run: |
+          ditto -c -k --sequesterRsrc --keepParent             build/Build/Products/Debug-iphonesimulator/App.app             Restaurant-Template-Pro-iOS-Simulator.zip
+
+      - name: Upload iOS simulator build
+        uses: actions/upload-artifact@v4
+        with:
+          name: restaurant-template-pro-ios-simulator
+          path: ios/App/Restaurant-Template-Pro-iOS-Simulator.zip
+          if-no-files-found: error
