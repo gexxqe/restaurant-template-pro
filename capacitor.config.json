@@ -1,0 +1,11 @@
+{
+  "appId": "com.restaurant.templatepro",
+  "appName": "Restaurant Template Pro",
+  "webDir": "web",
+  "android": {
+    "allowMixedContent": false
+  },
+  "ios": {
+    "contentInset": "automatic"
+  }
+}
