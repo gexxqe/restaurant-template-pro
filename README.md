@@ -13,3 +13,10 @@ Base professionnelle et neutre destinée à créer rapidement un site pour un re
 Commencez par `CUSTOMIZATION.md`, puis modifiez uniquement `web/config.js` pour préparer un nouveau client.
 
 Le configurateur visuel est disponible dans `web/customize.html` (ou à l’adresse `/customize.html` une fois le site publié).
+
+
+## Android & iOS
+
+Le projet est également préparé pour Capacitor afin d’utiliser le même dossier `web/` pour le site et les applications mobiles.
+
+Voir `MOBILE.md` pour générer les projets Android et iOS.
