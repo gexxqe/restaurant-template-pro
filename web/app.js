@@ -28,7 +28,9 @@
   }
   function applyBranding(){
     const branding=cfg.branding||{};
-    const heroImage=branding.heroImageDataUrl||branding.heroImageUrl||'';
+    // Images Unsplash : taille adaptée à l’écran (identique au préchargement de index.html).
+    const sized=(url,w)=>/images\.unsplash\.com/.test(url)?url.replace(/([?&])w=\d+/,'$1w='+w).replace(/([?&])q=\d+/,'$1q=70'):url;
+    const heroImage=branding.heroImageDataUrl||sized(branding.heroImageUrl||'',window.innerWidth<=700?800:1600);
     const heroCard=document.querySelector('.hero-card');
     if(heroCard){
       if(heroImage){
@@ -55,7 +57,7 @@
     const galleryGrid=document.getElementById('galleryGrid');
     if(gallerySection&&galleryGrid){
       if(gallery.length){
-        galleryGrid.innerHTML=gallery.map((src,index)=>`<figure class="gallery-item"><img src="${esc(src)}" alt="Photo du restaurant ${index+1}" loading="lazy"></figure>`).join('');
+        galleryGrid.innerHTML=gallery.map((src,index)=>`<figure class="gallery-item"><img src="${esc(sized(src,900))}" srcset="${/images\.unsplash\.com/.test(src)?[600,900,1200].map(w=>esc(sized(src,w))+' '+w+'w').join(', '):esc(src)+' 1200w'}" sizes="(max-width:800px) 100vw, 360px" width="1200" height="800" alt="Photo du restaurant ${index+1}" loading="lazy" decoding="async"></figure>`).join('');
         gallerySection.hidden=false;
       }else{
         galleryGrid.replaceChildren();
